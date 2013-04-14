@@ -112,20 +112,28 @@ exports.main = function(options) {
 
 
 function getCurrentURL(){
-  return Cc['@mozilla.org/appshell/window-mediator;1']
+  try {
+    return Cc['@mozilla.org/appshell/window-mediator;1']
                     .getService(Ci.nsIWindowMediator)
                     .getMostRecentWindow('navigator:browser')
                     .getBrowser()
                     .contentDocument
                     .location
                     .host;
+  } catch (err) {
+    return "";
+  }
 }
 
 function getCookies(){
-  return Cc['@mozilla.org/appshell/window-mediator;1']
+  try {
+    return Cc['@mozilla.org/appshell/window-mediator;1']
                     .getService(Ci.nsIWindowMediator)
                     .getMostRecentWindow('navigator:browser')
                     .getBrowser()
                     .contentDocument
                     .cookie;
+  } catch (err) {
+    return "";
+  }
 }
