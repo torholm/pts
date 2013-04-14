@@ -53,12 +53,11 @@ function createButton(options) {
       tooltiptext: "Rapportera till PTS",
       image: data.url("favicon.ico"),
       menu: menu,
-      onCommand: function(ev) {
-       var 
+      onCommand: function(ev) { 
           url = getCurrentURL(),
           cookies = getCookies();
  
-        if (ev.target.id != "ptsbutton" || cookies == null ) 
+        if (ev.target.id != "ptsbutton" || !cookies ) 
           return;
 
         var 
