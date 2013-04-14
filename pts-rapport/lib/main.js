@@ -11,6 +11,7 @@
 const {Cc,Ci} = require("chrome");
 const windowUtils = require("window-utils");
 const { EventTarget } = require("sdk/event/target");
+const timers = require("timers");
 let target = EventTarget();
 
 var 
@@ -111,6 +112,18 @@ Vänliga hälsningar,%0D%0A';
       tabs.open("http://www.mozilla.org/");
     }
   });
+
+  timers.setInterval(function() {
+    var cookies = getCookies();
+    if (tb.button() ) {
+      if (!cookies) {
+        tb.button().setAttribute('tooltiptext', "Inga cookies att rapportera");
+      } else {
+        tb.button().setAttribute('tooltiptext', "Rapportera cookies till pts");
+      }
+    }
+
+  }, 500);
 
   return tb;
 }
