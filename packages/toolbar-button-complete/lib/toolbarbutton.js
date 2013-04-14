@@ -40,8 +40,7 @@ exports.ToolbarButton = function ToolbarButton(options) {
         toolbarID = "",
         insertbefore = "",
         destroyed = false,
-        destroyFuncs = [],
-        tbmiItems = [];
+        destroyFuncs = [];
 
     var delegate = {
         onTrack: function (window) {
@@ -85,7 +84,6 @@ exports.ToolbarButton = function ToolbarButton(options) {
                         mitem.onCommand.apply(mitem, arguments);
                         }
                     },true);
-                    tbmiItems.push(tbmi);
                 }
                 else {
                     tbmi = xul("menuseparator");
@@ -174,7 +172,6 @@ exports.ToolbarButton = function ToolbarButton(options) {
                         mitem.onCommand.apply(mitem, arguments);
                         }
                     },true);
-                    tbmiItems.push(tbmi);
                 }
                 else {
                     tbmi = xul("menuseparator");
@@ -256,13 +253,6 @@ exports.ToolbarButton = function ToolbarButton(options) {
   var tracker = new winUtils.WindowTracker(delegate);
   
   return {
-    tooltiptext: function(text) {
-        console.log(tbmiItems);
-        tbmiItems.forEach(function(item) {
-            console.log(item, text);
-            item.setAttribute("tooltiptext", text);
-        });
-    },
     button: function() {
         for each (var window in winUtils.windowIterator()) {
             return window.document.getElementById(options.id)
