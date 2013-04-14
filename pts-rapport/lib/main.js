@@ -100,7 +100,6 @@ function createButton(options) {
 exports.main = function(options) {
   button = createButton(options);
 
-  console.log( options );
   // On install moves button into the toolbar
   if (options.loadReason == "install") {
     button.moveTo({
