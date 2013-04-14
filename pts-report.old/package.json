@@ -1,0 +1,10 @@
+{
+    "name": "pts-report", 
+    "license": "MPL 2.0", 
+    "author": "DFRI", 
+    "version": "0.2", 
+    "fullName": "pts-report", 
+    "id": "jid1-TUFjT9q8ASIsBQ", 
+    "description": "Tool for reporting cookie violations to PTS",
+    "dependencies": ["menupopup", "addon-sdk"]
+}

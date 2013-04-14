@@ -1,0 +1,14 @@
+{
+    "name": "pts-rapport", 
+    "license": "MPL 2.0", 
+    "author": "", 
+    "version": "0.3", 
+    "dependencies": [
+        "toolbar-button-complete", 
+        "api-utils", 
+        "addon-kit"
+    ], 
+    "fullName": "pts-rapport", 
+    "id": "jid1-PA0kK7d1bvHpUg", 
+    "description": "Rapporterar tillsyns\u00e4renden till PTS"
+}

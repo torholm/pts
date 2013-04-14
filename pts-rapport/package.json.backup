@@ -1,0 +1,9 @@
+{
+  "name": "pts-rapport",
+  "fullName": "pts-rapport",
+  "description": "Rapporterar tillsynsärenden till PTS",
+  "author": "",
+  "license": "MPL 2.0",
+  "version": "0.1",
+  "dependencies": ["toolbar-button-complete", "api-utils", "addon-kit"]
+}
