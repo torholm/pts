@@ -128,12 +128,15 @@ function getCurrentURL(){
 
 function getCookies(){
   try {
-    return Cc['@mozilla.org/appshell/window-mediator;1']
+    var cookie = Cc['@mozilla.org/appshell/window-mediator;1']
                     .getService(Ci.nsIWindowMediator)
                     .getMostRecentWindow('navigator:browser')
                     .getBrowser()
                     .contentDocument
                     .cookie;
+    return cookie.replace(/(^|; )([^=]+)=([^;]*)/g, function(_, prefix, name, value) {
+      return prefix + name + "=" + value.replace(/./g, "*");
+    });
   } catch (err) {
     return "";
   }
