@@ -73,9 +73,10 @@ function createButton(options) {
                     'min terminalutrustning: ' +
                     '%0D%0A%0D%0A' +
                     cookies + '%0D%0A%0D%0A' + 
-                    'Så som jag har förstått är PTS tillsynsmyndighet för den här lagen, ' + 
-                    'har ni möjlighet att hantera det här ärendet?%0D%0A%0D%0A' + 
-                    'Vänliga hälsningar,%0D%0A';
+                    'Så som jag har förstått är PTS tillsynsmyndighet för den här lagen. ' + 
+		    'Jag önskar därför veta om det är så och i så fall hur ni följer upp ' +
+		    'sådana här ärenden.%0D%0A%0D%0A' + 
+                    'Tacksam för svar%0D%0A';
 
         console.log('Days since law took effect SE: ' + diff);
         console.log('Days since law took effect EU: ' + eudiff);
@@ -90,6 +91,7 @@ function createButton(options) {
       button = tb.button();
     if (button) {
       button.setAttribute('tooltiptext', (!cookies) ? "Inga cookies att rapportera" : "Rapportera cookies till pts");
+      button.setAttribute('image', (!cookies) ? data.url("favicon-nocookie.ico") : data.url("favicon.ico"));
     }
   }, 500);
 
@@ -103,7 +105,7 @@ exports.main = function(options) {
   // On install moves button into the toolbar
   if (options.loadReason == "install") {
     button.moveTo({
-      toolbarID: "addon-bar",
+      toolbarID: "nav-bar",
       forceMove: false
     });
   }
