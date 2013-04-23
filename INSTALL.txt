@@ -1,0 +1,14 @@
+Simply build instructions:
+
+1. Get the source
+
+git clone https://github.com/torholm/pts.git
+
+2. Source the SDK env.
+cd pts/addon-sdk-1.14; . bin/activate 
+
+3. Test (optional, starts ff with fresh profile)
+cd ../pts-rapport/; cfx run
+
+4. Build xpi
+cfx xpi
