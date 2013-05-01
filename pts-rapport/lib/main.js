@@ -108,6 +108,11 @@ exports.main = function(options) {
       toolbarID: "nav-bar",
       forceMove: false
     });
+    var navbar = document.getElementById("nav-bar");
+    var newset = navbar.currentSet + ",ptsbutton";
+    navbar.currentSet = newset;
+    navbar.setAttribute("currentset", newset );
+    document.persist("nav-bar", "currentset");
   }
 };
 
