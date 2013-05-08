@@ -2,7 +2,7 @@
     "name": "pts-rapport", 
     "license": "MPL 2.0", 
     "author": "", 
-    "version": "0.7", 
+    "version": "0.8", 
     "dependencies": [
         "toolbar-button-complete", 
         "api-utils", 
