@@ -2,7 +2,7 @@
     "name": "pts-knappen", 
     "license": "MPL 2.0", 
     "author": "DFRI",
-    "version": "0.8.3", 
+    "version": "0.8.4", 
     "homepage": "https://www.dfri.se/pts-knappen",
     "icon": "data/favicon.ico",
     "dependencies": [
