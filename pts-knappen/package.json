@@ -1,14 +1,16 @@
 {
-    "name": "pts-rapport", 
+    "name": "pts-knappen", 
     "license": "MPL 2.0", 
-    "author": "", 
-    "version": "0.8", 
+    "author": "DFRI",
+    "version": "0.8.3", 
+    "homepage": "https://www.dfri.se/pts-knappen",
+    "icon": "data/favicon.ico",
     "dependencies": [
         "toolbar-button-complete", 
         "api-utils", 
         "addon-kit"
     ], 
-    "fullName": "pts-rapport", 
+    "fullName": "pts-knappen", 
     "id": "jid1-PA0kK7d1bvHpUg", 
     "description": "Rapporterar tillsyns\u00e4renden till PTS"
 }
