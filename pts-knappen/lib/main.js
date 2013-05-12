@@ -1,5 +1,5 @@
 /*
- * PTS rapport - Using some example code from Evegueni Naverniouk and User213 for FF toolbar buttons.
+ * PTS Knappen - Using some example code from Evegueni Naverniouk and User213 for FF toolbar buttons.
  * Thanks for making code public!
  *
  * This code is under a BSD License!
@@ -38,11 +38,11 @@ function createButton(options) {
         }
       }, {
         id: "ptsbutton-menu-2",
-        label: "Om PTS Rapport",
+        label: "Om PTS-knappen",
         type: null,
         checked: false,
         onCommand: function() {
-          tabs.open("https://www.dfri.se/cookies/pts-rapport/");
+          tabs.open("https://www.dfri.se/pts-knappen/");
         }
       }]
     },
