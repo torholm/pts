@@ -12,15 +12,15 @@ function customMailtoUrl() {
   return window.localStorage.customMailtoUrl;
 }
 
-function executeMailto(url, cookies) {
+function executeMailto(domain, cookies) {
   var 
     customMailTo = customMailtoUrl(),
     defaultHandler = customMailTo.length == 0,
     ptsMailAdress = 'pts@pts.se',
-    ptsSubject = 'Önskar tillsyn angående ' + url + '(LEK kap6 §18)',
+    ptsSubject = 'Önskar tillsyn angående ' + domain + '(LEK kap6 §18)',
     ptsBody = 'Hej PTS!\r\n' +
-              'Jag besväras av att ' + url + ' inte tycks följa LEK kap 6 §18. ' +
-              'Här följer de kakor som ' + url + ' valt att utan samtycke lagra på ' +
+              'Jag besväras av att ' + domain + ' inte tycks följa LEK kap 6 §18. ' +
+              'Här följer de kakor som ' + domain + ' valt att utan samtycke lagra på ' +
               'min terminalutrustning: ' +
               '\r\n\r\n' +
               cookies + '\r\n\r\n' +
@@ -54,6 +54,11 @@ function deactivateIcon() {
     chrome.browserAction.setTitle({ title: "Inga cookies att rapportera" });
     chrome.browserAction.setIcon({ path: "favicon-nocookie.ico" });
   });
+}
+
+function getDomain(url) {
+  var match = /^https?:\/\/([^\/]+)/.exec(url);
+  return match[1];
 }
 
 setInterval(function() {
@@ -104,7 +109,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
      * Send mail with cookies where cookies is a newline concatenated string containing cookie name + value, 
      * where every character in each cookie's value is changed to a star (*).
      */
-    executeMailto(tab.url, cookies.map(function(cookie) {
+    executeMailto(getDomain(tab.url), cookies.map(function(cookie) {
       return cookie.name + "=" + cookie.value.replace(/./g, "*");
     }).join("\r\n"));
   });
