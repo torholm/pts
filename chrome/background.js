@@ -25,6 +25,22 @@ function executeMailto(url, cookies) {
   chrome.tabs.create({ url: action_url }); 
 }
 
+function activateIcon(numCookies) {
+  chrome.browserAction.getTitle({}, function(title) {
+    if (title === "Rapportera cookies (" + numCookies + ") till pts") return;
+    chrome.browserAction.setTitle({ title: "Rapportera cookies (" + numCookies + ") till pts" });
+    chrome.browserAction.setIcon({ path: "favicon.ico" });
+  });
+}
+
+function deactivateIcon() {
+  chrome.browserAction.getTitle({}, function(title) {
+    if (title === "Inga cookies att rapportera") return;
+    chrome.browserAction.setTitle({ title: "Inga cookies att rapportera" });
+    chrome.browserAction.setIcon({ path: "favicon-nocookie.ico" });
+  });
+}
+
 setInterval(function() {
   /* Get current window */
   chrome.windows.getCurrent(function(window) {
@@ -35,16 +51,16 @@ setInterval(function() {
       highlighted: true
     }, function(tabs) {
       if (tabs.length === 0) {
-        chrome.browserAction.setIcon({ path: "favicon-nocookie.ico" });
+        deactivateIcon();
       }
       var tab = tabs[0];
       chrome.cookies.getAll({
         url: tab.url
       }, function(cookies) {
         if (cookies.length > 0) {
-          chrome.browserAction.setIcon({ path: "favicon.ico" });
+          activateIcon(cookies.length);
         } else {
-          chrome.browserAction.setIcon({ path: "favicon-nocookie.ico" });
+          deactivateIcon();
         }
       });
     });
@@ -74,10 +90,10 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 
     /* 
      * Send mail with cookies where cookies is a newline concatenated string containing cookie name + value, 
-     * where every character in each cookie's name is changed to a star (*).
+     * where every character in each cookie's value is changed to a star (*).
      */
     executeMailto(tab.url, cookies.map(function(cookie) {
-      return cookie.name.replace(/./g, "*") + "=" + cookie.value;
+      return cookie.name + "=" + cookie.value.replace(/./g, "*");
     }).join("\r\n"));
   });
 });
