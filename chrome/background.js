@@ -4,8 +4,18 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+function customMailtoUrl() {
+  if (window.localStorage == null)
+    return "";
+  if (window.localStorage.customMailtoUrl == null)
+    return "";
+  return window.localStorage.customMailtoUrl;
+}
+
 function executeMailto(url, cookies) {
   var 
+    customMailTo = customMailtoUrl(),
+    defaultHandler = customMailTo.length == 0,
     ptsMailAdress = 'pts@pts.se',
     ptsSubject = 'Önskar tillsyn angående ' + url + '(LEK kap6 §18)',
     ptsBody = 'Hej PTS!\r\n' +
@@ -18,11 +28,16 @@ function executeMailto(url, cookies) {
               'Jag önskar därför veta om det är så och i så fall hur ni följer upp ' +
               'sådana här ärenden.\r\n\r\n' +
               'Tacksam för svar\r\n',
-    action_url = "mailto:" + ptsMailAdress + "?subject="+ encodeURIComponent(ptsSubject) + "&body=" + encodeURIComponent(ptsBody);
+    actionUrl = "mailto:" + ptsMailAdress + "?subject="+ encodeURIComponent(ptsSubject) + "&body=" + encodeURIComponent(ptsBody);
 
   console.info("Cookies:\n", cookies);
-  console.log('Action url: ' + action_url);
-  chrome.tabs.create({ url: action_url }); 
+  console.log('Action url: ' + actionUrl);
+
+  if (!defaultHandler) {
+    chrome.tabs.create({ url: customMailTo.replace("%s", encodeURIComponent(actionUrl)) });
+  } else {
+    chrome.tabs.create({ url: actionUrl }); 
+  }
 }
 
 function activateIcon(numCookies) {
@@ -42,27 +57,24 @@ function deactivateIcon() {
 }
 
 setInterval(function() {
-  /* Get current window */
-  chrome.windows.getCurrent(function(window) {
-    /* Find active and highlighted tabs in current window */
-    chrome.tabs.query({
-      windowId: window.id,
-      active: true,
-      highlighted: true
-    }, function(tabs) {
-      if (tabs.length === 0) {
+  /* Find active and highlighted tabs in current window */
+  chrome.tabs.query({
+    windowId: chrome.windows.WINDOW_ID_CURRENT,
+    active: true,
+    highlighted: true
+  }, function(tabs) {
+    if (tabs.length === 0) {
+      deactivateIcon();
+    }
+    var tab = tabs[0];
+    chrome.cookies.getAll({
+      url: tab.url
+    }, function(cookies) {
+      if (cookies.length > 0) {
+        activateIcon(cookies.length);
+      } else {
         deactivateIcon();
       }
-      var tab = tabs[0];
-      chrome.cookies.getAll({
-        url: tab.url
-      }, function(cookies) {
-        if (cookies.length > 0) {
-          activateIcon(cookies.length);
-        } else {
-          deactivateIcon();
-        }
-      });
     });
   });
 }, 500);
