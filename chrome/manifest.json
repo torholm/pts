@@ -4,7 +4,10 @@
   "name": "PTS-Knappen",
   "description": "Anmäl tillsynsärenden till PTS",
   "homepage_url": "https://www.dfri.se/pts-knappen",
-  "version": "0.3",
+  "icons": { "16": "favicon.ico",
+           "48": "logo48.jpg",
+          "128": "logo128.jpg" },
+  "version": "0.4",
   "options_page": "options.html",
   "permissions": [
     "tabs",
