@@ -72,7 +72,11 @@ exports.ToolbarButton = function ToolbarButton(options) {
                     if (mitem.id) tbmi.setAttribute("id", mitem.id);
                     if (mitem.label) tbmi.setAttribute("label", mitem.label);
                     if (mitem.image) {
-                        tbmi.setAttribute("class", "menuitem-iconic");
+                        if (mitem.type == "menu")
+                            tbmi.setAttribute("class", "menu-iconic");
+                        else
+                            tbmi.setAttribute("class", "menuitem-iconic");
+                            
                         tbmi.setAttribute("image", mitem.image);
                         //tbmi.style.listStyleImage = "url('" + mitem.image + "')";
                     }
@@ -160,7 +164,11 @@ exports.ToolbarButton = function ToolbarButton(options) {
                     if (mitem.id) tbmi.setAttribute("id", mitem.id);
                     if (mitem.label) tbmi.setAttribute("label", mitem.label);
                     if (mitem.image) {
-                        tbmi.setAttribute("class", "menuitem-iconic");
+                        if (mitem.type == "menu")
+                            tbmi.setAttribute("class", "menu-iconic");
+                        else
+                            tbmi.setAttribute("class", "menuitem-iconic");
+                            
                         tbmi.setAttribute("image", mitem.image);
                         //tbmi.style.listStyleImage = "url('" + mitem.image + "')";
                     }
